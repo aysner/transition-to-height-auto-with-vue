@@ -20,25 +20,31 @@ export default {
           element.style.position = `absolute`;
           element.style.visibility = `hidden`;
           element.style.height = `auto`;
+          element.style.transition = `none`;
           /* eslint-enable */
 
-          const { height } = getComputedStyle(element);
+          const { height, paddingTop, paddingBottom } = getComputedStyle(element);
 
           /* eslint-disable no-param-reassign */
           element.style.width = null;
           element.style.position = null;
           element.style.visibility = null;
           element.style.height = 0;
+          element.style.paddingTop = 0;
+          element.style.paddingBottom = 0;
           /* eslint-enable */
 
           // Force repaint to make sure the
           // animation is triggered correctly.
           // eslint-disable-next-line no-unused-expressions
           getComputedStyle(element).height;
+          element.style.transition = '';
 
           requestAnimationFrame(() => {
             // eslint-disable-next-line no-param-reassign
             element.style.height = height;
+            element.style.paddingTop = paddingTop;
+            element.style.paddingBottom = paddingBottom;
           });
         },
         leave(element) {
@@ -55,6 +61,8 @@ export default {
           requestAnimationFrame(() => {
             // eslint-disable-next-line no-param-reassign
             element.style.height = 0;
+            element.style.paddingTop = 0;
+            element.style.paddingBottom = 0;
           });
         },
       },
@@ -77,7 +85,7 @@ export default {
 <style>
 .expand-enter-active,
 .expand-leave-active {
-  transition: height 1s ease-in-out;
+  transition: height 1s ease-in-out, padding 1s ease-in-out;
   overflow: hidden;
 }
 
