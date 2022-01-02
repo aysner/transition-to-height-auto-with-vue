@@ -38,13 +38,15 @@ export default {
           // animation is triggered correctly.
           // eslint-disable-next-line no-unused-expressions
           getComputedStyle(element).height;
+          // eslint-disable-next-line no-param-reassign
           element.style.transition = '';
 
           requestAnimationFrame(() => {
-            // eslint-disable-next-line no-param-reassign
+            /* eslint-disable no-param-reassign */
             element.style.height = height;
             element.style.paddingTop = paddingTop;
             element.style.paddingBottom = paddingBottom;
+            /* eslint-enable */
           });
         },
         leave(element) {
@@ -59,10 +61,11 @@ export default {
           getComputedStyle(element).height;
 
           requestAnimationFrame(() => {
-            // eslint-disable-next-line no-param-reassign
+            /* eslint-disable no-param-reassign */
             element.style.height = 0;
             element.style.paddingTop = 0;
             element.style.paddingBottom = 0;
+            /* eslint-enable */
           });
         },
       },
